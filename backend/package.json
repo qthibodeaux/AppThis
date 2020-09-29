@@ -1,0 +1,25 @@
+{
+  "name": "apptosms",
+  "version": "1.0.0",
+  "description": "Full Stack App to demonstrate a text notification system.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qthibodeaux/AppToSMS.git"
+  },
+  "author": "Quintus Thibodeaux",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qthibodeaux/AppToSMS/issues"
+  },
+  "homepage": "https://github.com/qthibodeaux/AppToSMS#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "knex": "^0.21.5",
+    "pg": "^8.3.3",
+    "body-parser": "^1.19.0"
+  }
+}
