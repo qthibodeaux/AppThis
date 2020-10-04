@@ -6,7 +6,8 @@ const initialState = {
     timeValue: "07:30",
     whereValue: "Meeting Room #1",
     numberValue: "281-555-5555",
-    emailValue: "email@mail.com"
+    emailValue: "email@mail.com",
+    databaseArray: [""],
 }
 
 
@@ -38,6 +39,8 @@ const reducer = (currentState, action) => {
         nextState.numberValue = action.value
     } else if (type === 'EMAILVALUE') {
         nextState.emailValue = action.value
+    } else if (type === 'DATABASEVALUE') {
+        nextState.databaseArray = action.value
     }
 
     return nextState

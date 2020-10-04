@@ -16,7 +16,8 @@ app.get("/list", function (req, res){
       console.log("Success")
       console.log(list)
       console.log("````````````````````````````````````````````````````")
-      res.send({some: 'json'})
+      //res.send({some: 'json'})
+      res.send(list.rows)
     })
     .catch((err) => {
       res.status(404).send('Iono fam')

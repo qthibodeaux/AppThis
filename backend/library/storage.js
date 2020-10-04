@@ -25,13 +25,13 @@ function connect () {
 }
 
 //Grab All Threads SQL Query
-const getNotesQuery = `select * from notes;`
+const getNotesQuery = `select * from notes`
 
 //Returns all threads from promise
 function getNotes () {
     return conn.raw(getNotesQuery)
     .then((result) => {
-        return result.rows
+        return result
     }) 
     .catch((err) => {
         console.log(err)

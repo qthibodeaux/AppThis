@@ -1,7 +1,7 @@
 const createNotesTable = `
 CREATE TABLE Notes (
     id serial primary key,
-    uuid text unique,
+    uuid text,
     content text, 
     time time, 
     date date, 
@@ -11,7 +11,7 @@ CREATE TABLE Notes (
     mtime timestamptz default current_timestamp
     );`
 
-const dropNotesTable = `DROP TABLE "Notes";`
+const dropNotesTable = `DROP TABLE "notes";`
 
 exports.up = function(knex) {
     return knex.raw(createNotesTable)
