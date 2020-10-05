@@ -1,11 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
+    flexDirection: 'column',
     flexWrap: 'wrap',
   },
   textField: {
@@ -28,10 +30,12 @@ function DateAndTime(props) {
 
   return (
     <form className={classes.container} noValidate>
-      <div display="flex" flexDirection="column">
+      <Typography variant="subtitle2" gutterBottom display={"inline"}>
+                What is the time and date of the appointment?
+             </Typography>
          <TextField
             id="date"
-            label="Birthday"
+            label="Date"
             type="date"
             defaultValue={props.dateValue}
             className={classes.textField}
@@ -42,7 +46,7 @@ function DateAndTime(props) {
           />
         <TextField
             id="time"
-            label="Alarm clock"
+            label="Time"
             type="time"
             defaultValue={props.timeValue}
             className={classes.textField}
@@ -54,9 +58,6 @@ function DateAndTime(props) {
             }}
             onChange={(e) => timeSelection(e.currentTarget.value)}
           />
-          <p>Date: {props.dateValue}</p>
-          <p>Time: {props.timeValue}</p>
-      </div>
     </form>
   );
 }

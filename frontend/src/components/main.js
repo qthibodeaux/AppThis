@@ -3,22 +3,23 @@ import Message  from './message';
 import Grid from '@material-ui/core/Grid';
 import DateAndTime from './dateandtime';
 import Where from './where';
-import Number from './number'
+import Number from './number';
+import Paper from '@material-ui/core/Paper';
 
 function Main () {
     return(
-        <Grid container>
+        <Grid container spacing={2}>
             <Grid item>
-                <Grid><Message /></Grid>
+            <Paper elevation={3}><Message /></Paper>
             </Grid>
             <Grid item>
-                <Grid><DateAndTime /></Grid>
+            <Paper elevation={3}><DateAndTime /></Paper>
             </Grid>
             <Grid item>
-                <Grid><Where /></Grid>
+            <Paper elevation={3}><Where /></Paper>
             </Grid>
             <Grid item>
-                <Grid><Number /></Grid>
+            <Paper elevation={3}><Number /></Paper>
             </Grid>
         </Grid>
     )

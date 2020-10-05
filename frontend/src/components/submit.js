@@ -24,9 +24,39 @@ function SubmitButton(props) {
     })
   }
 
+  const testMessage = () => {
+    axios({
+      "method":"POST",
+      "url":"https://messagebird-sms-gateway.p.rapidapi.com/sms",
+      "headers":{
+      "content-type":"application/x-www-form-urlencoded",
+      "x-rapidapi-host":"messagebird-sms-gateway.p.rapidapi.com",
+      "x-rapidapi-key":"4e2c95e741msh2dcad6ec2c193e1p113bd9jsn0a15ca6eca79",
+      "useQueryString":true
+      },"params":{
+      "username":"qthibgit",
+      "password":"F3XKEvr6cdf3wGm"
+      },"data":{
+      "type":"normal",
+      "dlr_url":"http://www.example.com/dlr-messagebird.php",
+      "timestamp":"201308020025",
+      "reference":"268431687",
+      "sender":"MessageBird",
+      "destination":"2817348561",
+      "body":"This is a gsm 7-bit test message."
+      }
+      })
+      .then((response)=>{
+        console.log(response)
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
+  }
+
   return (
     <div className={classes.root}>
-      <Button variant="contained" color="primary" onClick={getBackend}>
+      <Button variant="contained" color="primary" onClick={testMessage}>
         Primary
       </Button>
       <div>

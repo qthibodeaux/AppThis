@@ -1,13 +1,18 @@
 import { createStore } from 'redux';
 
 const initialState = {
-    messageValue: "Sample",
-    dateValue: "2017-05-24",
-    timeValue: "07:30",
+    messageValue: "Message To Send",
+    messageValidation: {
+        tf: false,
+        text: ""
+    },
+    dateValue: "2020-10-24",
+    timeValue: "10:00",
     whereValue: "Meeting Room #1",
     numberValue: "281-555-5555",
     emailValue: "email@mail.com",
     databaseArray: [""],
+    submitted: false
 }
 
 
