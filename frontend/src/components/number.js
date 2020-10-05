@@ -9,6 +9,8 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         width: '25ch',
       },
+        display: 'flex',
+        flexDirection: 'column',
     },
   }));
 

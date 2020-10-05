@@ -9,6 +9,10 @@ const initialState = {
     dateValue: "2020-10-24",
     timeValue: "10:00",
     whereValue: "Meeting Room #1",
+    whereValidation: {
+        tf: false,
+        text: ""
+    },
     numberValue: "281-555-5555",
     emailValue: "email@mail.com",
     databaseArray: [""],
