@@ -2,6 +2,7 @@ const express = require("express")
 const app = express()
 const db = require("./library/storage")
 const port = 5000
+const bodyParser = require("body-parser")
 require('dotenv').config()
 
 const twilio = require('twilio')
@@ -11,6 +12,7 @@ var authToken = process.env.TWILIOTOKEN
 var client = new twilio(accountSid, authToken)
 
 app.use(express.static("public"))
+app.use(bodyParser.json())
 app.use(express.urlencoded({extended: true}))
 
 app.get("/", function (req, res){

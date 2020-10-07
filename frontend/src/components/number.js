@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,25 +30,24 @@ function Number (props){
     return(
         <div>
             <form className={classes.root} noValidate autoComplete="off">
+                <Typography variant="subtitle2" gutterBottom>
+                    Please enter the number and the email and address.
+                </Typography>
                 <TextField 
                     id="filled-search" 
-                    label="Search field"
-                    type="search"
+                    label="Phone Number"
+                    type="Phone Number"
                     variant="filled" 
                     onChange={(e) => numberSelection(e.currentTarget.value)}
                 />
                 <TextField
-                    id="filled-helperText"
-                    label="Helper text"
-                    defaultValue="Default Value"
-                    helperText="Some important text"
-                    variant="filled"
+                    id="filled-search" 
+                    label="Email Address"
+                    type="Email Address"
+                    variant="filled" 
                     onChange={(e) => emailSelection(e.currentTarget.value)}
                 />
             </form>
-        
-            <p>{props.numberValue}</p>
-            <p>{props.emailValue}</p>
         </div>
     )
 }
