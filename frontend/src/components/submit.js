@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
 function SubmitButton(props) {
   const classes = useStyles();
   const [nem, setNem] = useState([""])
+  const [isDisbled, setDisable] = useState(true)
 
   const getBackend = () => {
     axios.get("/list").then(response => {
@@ -56,7 +57,7 @@ function SubmitButton(props) {
 
   return (
     <div className={classes.root}>
-      <Button variant="contained" color="primary" onClick={testMessage}>
+      <Button variant="contained" color="primary" onClick={testMessage} disabled={isDisbled}>
         Primary
       </Button>
       <div>

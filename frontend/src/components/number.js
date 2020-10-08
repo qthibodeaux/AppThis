@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -18,14 +18,33 @@ const useStyles = makeStyles((theme) => ({
 function Number (props){
 
     const classes = useStyles();
+    const [num, getNum] = useState("")
+
 
     const numberSelection = (val) => {
-        props.dispatch({type: 'NUMBERVALUE', value: val})
+        const re = /^[0-9\b]+$/;
+        console.log(re.test(val))
+        if (val === '' || re.test(val)) {
+            //props.dispatch({type: 'NUMBERVALUE', value: val})
+            getNum(val)
+         }
     }
 
     const emailSelection = (val) => {
         props.dispatch({type: 'EMAILVALUE', value: val})
     }
+
+    function ValidateEmail(mail) 
+{
+ if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail))
+  {
+      console.log("true")
+    return (true)
+  }
+    console.log("You have entered an invalid email address!")
+    return (false)
+}
+
 
     return(
         <div>
@@ -38,6 +57,7 @@ function Number (props){
                     label="Phone Number"
                     type="Phone Number"
                     variant="filled" 
+                    value={num}
                     onChange={(e) => numberSelection(e.currentTarget.value)}
                 />
                 <TextField
@@ -47,6 +67,7 @@ function Number (props){
                     variant="filled" 
                     onChange={(e) => emailSelection(e.currentTarget.value)}
                 />
+                <div>{num}</div>
             </form>
         </div>
     )
