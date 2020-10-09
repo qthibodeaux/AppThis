@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
     },
   }));
+ 
 
 function Number (props){
 
@@ -45,7 +46,6 @@ function Number (props){
     return (false)
 }
 
-
     return(
         <div>
             <form className={classes.root} noValidate autoComplete="off">
@@ -57,6 +57,7 @@ function Number (props){
                     label="Phone Number"
                     type="Phone Number"
                     variant="filled" 
+                    helperText="Format: +1XXXXXXXXX"
                     value={num}
                     onChange={(e) => numberSelection(e.currentTarget.value)}
                 />
@@ -65,9 +66,9 @@ function Number (props){
                     label="Email Address"
                     type="Email Address"
                     variant="filled" 
+                    helperText="Format: name@mail.com"
                     onChange={(e) => emailSelection(e.currentTarget.value)}
                 />
-                <div>{num}</div>
             </form>
         </div>
     )
