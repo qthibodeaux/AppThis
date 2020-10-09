@@ -3,6 +3,8 @@ const app = express()
 const db = require("./library/storage")
 const port = 5000
 const bodyParser = require("body-parser")
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 require('dotenv').config()
 
 const twilio = require('twilio')
@@ -35,14 +37,32 @@ app.get("/list", function (req, res){
 })
 
 app.post("/hi", function (req, res){
+  const text = req.body.text.text
+  const toPerson = '+1'+req.body.to
+  const email = req.body.email
+
   client.messages
   .create({
-     body: 'This Quincy, testing out this app. txt my personal number if u get this',
+     body: text,
      from: process.env.TWILIONUMBER,
-     to: process.env.MYNUMBER
+     to: toPerson
    })
   .then((message) => {
     console.log(message.sid)
+  }).catch((err) => {
+    console.log(err)
+  })
+
+  const message = {
+    to: email,
+    from: 'qthibgit@gmail.com',
+    subject: 'This is Quintus from AppThis',
+    text: text,
+  }
+
+  sgMail.send(message)
+  .then((message) => {
+    console.log(message)
   }).catch((err) => {
     console.log(err)
   })
