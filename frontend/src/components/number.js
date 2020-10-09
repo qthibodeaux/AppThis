@@ -20,31 +20,64 @@ function Number (props){
 
     const classes = useStyles();
     const [num, getNum] = useState("")
+    const [numberError, setError] = useState(false)
+    const [numberHelpText, setHelpText] = useState("Format: +1XXXXXXXXX")
+    const [numberValidity, setValidity] = useState(false)
+    const [emailError, setEmailError] = useState(false)
+    const [emailHelpText, setEmailHelpText] = useState("")
+    const [emailValidity, setEmailValidity] = useState(false)
+    const [len, setlen] = useState(num.length)
 
 
     const numberSelection = (val) => {
+        
+        numberTest(val)
+
+        lengthTest(num.length)
+
+        props.dispatch({type: 'NUMBERVALUE', value: num, valid: numberValidity})
+    }
+
+    function numberTest (val) {
         const re = /^[0-9\b]+$/;
-        console.log(re.test(val))
         if (val === '' || re.test(val)) {
-            //props.dispatch({type: 'NUMBERVALUE', value: val})
             getNum(val)
          }
     }
 
-    const emailSelection = (val) => {
-        props.dispatch({type: 'EMAILVALUE', value: val})
+    function lengthTest (val) {
+        if(val !== 10) {
+            
+            setValidity(false)
+            setError(true)
+            setHelpText("Number must be 10 characters.")
+        } else {
+            setValidity(true)
+            setError(false)
+            setHelpText("Format: +1XXXXXXXXX")
+        }
+        setlen(val + " setval " + numberValidity.toString())
     }
 
-    function ValidateEmail(mail) 
-{
- if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail))
-  {
-      console.log("true")
-    return (true)
-  }
-    console.log("You have entered an invalid email address!")
-    return (false)
-}
+    const emailSelection = (val) => {
+        validateEmail(val)
+        props.dispatch({type: 'EMAILVALUE', value: val, valid: emailValidity})
+    }
+
+    function validateEmail (mail) {
+        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail))
+        {
+            setEmailError(false)
+            setEmailHelpText("")
+            setEmailValidity(true)
+        } else {
+            setEmailError(true)
+            setEmailHelpText("Format: name@mail.com")
+            setEmailValidity(false)
+        }
+        
+        
+    }
 
     return(
         <div>
@@ -57,8 +90,9 @@ function Number (props){
                     label="Phone Number"
                     type="Phone Number"
                     variant="filled" 
-                    helperText="Format: +1XXXXXXXXX"
+                    helperText={numberHelpText}
                     value={num}
+                    error={numberError}
                     onChange={(e) => numberSelection(e.currentTarget.value)}
                 />
                 <TextField
@@ -66,9 +100,13 @@ function Number (props){
                     label="Email Address"
                     type="Email Address"
                     variant="filled" 
-                    helperText="Format: name@mail.com"
+                    helperText={emailHelpText}
+                    error={emailError}
                     onChange={(e) => emailSelection(e.currentTarget.value)}
                 />
+                <div>
+                    {len}
+                </div>
             </form>
         </div>
     )

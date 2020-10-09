@@ -61,21 +61,46 @@ function SubmitButton(props) {
         Primary
       </Button>
       <div>
-        <ul>
-          {props.databaseArray.map((element) => {
-            return <li>
-              {element.content}
-            </li>
-          })}
-        </ul>
+        <p>message value: {props.messageValue}</p>
+        <p>message validity: {props.messageValidation.toString()}</p>
+        <p>datevalue: {props.dateValue}</p>
+        <p>timevalue: {props.timeValue}</p>
+        <p>wherevalue: {props.whereValue}</p>
+        <p>wherevalidation {props.whereValidation.toString()}</p>
+        <p>numbervlaue: {props.numberValue}</p>
+        <p>numbervalidation {props.numberValidation.toString()}</p>
+        <p>emailvalue {props.emailValue}</p>
+        <p>emailValidity {props.emailValidity.toString()}</p>
       </div>
     </div>
   );
 }
+/*
+    messageValue: "Message To Send",
+    messageValidation: false,
+    dateValue: "2020-10-24",
+    timeValue: "10:00",
+    whereValue: "Meeting Room #1",
+    whereValidation: false,
+    numberValue: "",
+    numberValidation: false,
+    emailValue: "email@mail.com",
+    emailValidity: false,
+
+*/
 
 function mapStateToProps (currentReduxStoreState, _ownProps) {
   return {
-    databaseArray: currentReduxStoreState.databaseArray,
+    messageValue: currentReduxStoreState.messageValue,
+    messageValidation: currentReduxStoreState.messageValidation,
+    dateValue: currentReduxStoreState.dateValue,
+    timeValue: currentReduxStoreState.timeValue,
+    whereValue: currentReduxStoreState.whereValue,
+    whereValidation: currentReduxStoreState.whereValidation,
+    numberValue: currentReduxStoreState.numberValue,
+    numberValidation: currentReduxStoreState.numberValidation,
+    emailValue: currentReduxStoreState.emailValue,
+    emailValidity: currentReduxStoreState.emailValidity,
   }
 }
 

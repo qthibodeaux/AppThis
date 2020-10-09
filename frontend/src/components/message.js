@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -16,15 +16,31 @@ const useStyles = makeStyles((theme) => ({
 function Message (props){
     const classes = useStyles();
 
+    const [isError, setError] = useState(false)
+    const [helpText, setHelpText] = useState("")
+    const [validity, setValidity] = useState(false)
+
     const newSelection = (val) => {
-        if(val !== "Message To Send" && props.submitted === true) {
-            props.messageValidation.tf = false
-            props.messageValidation.text = ""
+        if(val !== "Message To Send") {
+            setValidity(true)
         }
-        props.dispatch({type: 'MESSAGEVALUE', value: val})
+
+        valLength(val)
+
+        props.dispatch({type: 'MESSAGEVALUE', value: val, valid: validity})
     }
 
-
+    function valLength(val) {
+        if(val.length < 4) {
+            setError(true)
+            setHelpText("Message must be longer than 5 characters.")
+            setValidity(false)
+        } else{
+            setError(false)
+            setHelpText("")
+            setValidity(true)
+        }
+    }
 
     return(
         <div>
@@ -39,8 +55,8 @@ function Message (props){
                     multiline
                     variant="filled"
                     onChange={(e) => newSelection(e.currentTarget.value)}
-                    error={props.messageValidation.tf}
-                    helperText={props.messageValidation.text}
+                    error={isError}
+                    helperText={helpText}
                 />
             </form>
         </div>
@@ -50,8 +66,6 @@ function Message (props){
 function mapStateToProps (currentReduxStoreState, _ownProps) {
     return {
         messageValue: currentReduxStoreState.messageValue,
-        messageValidation: currentReduxStoreState.messageValidation,
-        submitted: currentReduxStoreState.submitted,
     }
 }
 

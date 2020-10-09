@@ -2,21 +2,15 @@ import { createStore } from 'redux';
 
 const initialState = {
     messageValue: "Message To Send",
-    messageValidation: {
-        tf: false,
-        text: ""
-    },
+    messageValidation: false,
     dateValue: "2020-10-24",
     timeValue: "10:00",
     whereValue: "Meeting Room #1",
-    whereValidation: {
-        tf: false,
-        text: ""
-    },
-    numberValue: "281-555-5555",
+    whereValidation: false,
+    numberValue: "",
+    numberValidation: false,
     emailValue: "email@mail.com",
-    databaseArray: [""],
-    submitted: false
+    emailValidity: false,
 }
 
 
@@ -38,16 +32,20 @@ const reducer = (currentState, action) => {
 
     if (type === 'MESSAGEVALUE') {
         nextState.messageValue = action.value
+        nextState.messageValidation = action.valid
     } else if (type === 'DATEVALUE') {
         nextState.dateValue = action.value
     } else if (type === 'TIMEVALUE') {
         nextState.timeValue = action.value
     } else if (type === 'WHEREVALUE') {
         nextState.whereValue = action.value
+        nextState.whereValidation = action.valid
     } else if (type === 'NUMBERVALUE') {
         nextState.numberValue = action.value
+        nextState.numberValidation = action.valid
     } else if (type === 'EMAILVALUE') {
         nextState.emailValue = action.value
+        nextState.emailValidity = action.valid
     } else if (type === 'DATABASEVALUE') {
         nextState.databaseArray = action.value
     }

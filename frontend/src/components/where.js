@@ -1,5 +1,5 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -14,15 +14,32 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function Where (props){
+    const [isError, setError] = useState(false)
+    const [helpText, setHelpText] = useState("")
+    const [validity, setValidity] = useState(false)
 
     const classes = useStyles();
 
     const newSelection = (val) => {
-        if(val !== "Message To Send" && props.submitted === true) {
-            props.whereValidation.tf = false
-            props.whereValidation.text = ""
+        if(val !== "Message To Send") {
+            setValidity(true)
         }
-        props.dispatch({type: 'WHEREVALUE', value: val})
+
+        valLength(val)
+
+        props.dispatch({type: 'WHEREVALUE', value: val, valid: validity})
+    }
+
+    function valLength(val) {
+        if(val.length < 4) {
+            setError(true)
+            setHelpText("Message must be longer than 5 characters.")
+            setValidity(false)
+        } else{
+            setError(false)
+            setHelpText("")
+            setValidity(true)
+        }
     }
 
     return(
@@ -38,8 +55,8 @@ function Where (props){
                         multiline
                         variant="filled"
                         onChange={(e) => newSelection(e.currentTarget.value)}
-                        error={props.whereValidation.tf}
-                        helperText={props.whereValidation.text}
+                        error={isError}
+                        helperText={helpText}
                     />
             </form>
         </div>
@@ -49,8 +66,6 @@ function Where (props){
 function mapStateToProps (currentReduxStoreState, _ownProps) {
     return {
         whereValue: currentReduxStoreState.whereValue,
-        whereValidation: currentReduxStoreState.whereValidation,
-        submitted: currentReduxStoreState.submitted,
     }
 }
 
