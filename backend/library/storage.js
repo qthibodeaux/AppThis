@@ -1,5 +1,6 @@
 const knexLib = require('knex')
 const dbCfg = require('../knexfile')
+const { uuid } = require('./utils')
 
 let conn = null
 
@@ -38,7 +39,22 @@ function getNotes () {
     })
 }
 
+const createNameQuery = `insert into notes (uuid, message, date, time, destination, phoneNumber, ctime, mtime)
+values (?, ?, ?, ?, ?, ?, current_timestamp, current_timestamp)`
+
+//addMessage, addDate, addTime, addPlace, addPhone
+//message, date, time, where, toPerson
+function addEntry (addMessage, addDate, addTime, addPlace, addPhone) {
+    return conn.raw(createNameQuery, [uuid(), addMessage, addDate, addTime, addPlace, addPhone])
+        .then((result) => {
+            return result.rows[0]
+        }).catch((err) => {
+            console.log(err)
+        })
+}
+
 module.exports = {
     connect: connect,
     getNotes: getNotes,
+    addEntry: addEntry,
 }

@@ -35,10 +35,13 @@ function SubmitButton(props) {
   }
 
   const heyPost = () => {
-    axios.post("/hi", {
+    axios.post("/addEntry", {
       text: {text},
       to: props.number,
-      email: props.email
+      message: props.message,
+      date: props.date,
+      time: props.time,
+      where: props.where,
     }
       )
     .then(function (response) {

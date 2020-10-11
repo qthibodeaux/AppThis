@@ -2,11 +2,11 @@ const createNotesTable = `
 CREATE TABLE Notes (
     id serial primary key,
     uuid text,
-    content text, 
-    time time, 
-    date date, 
-    place text, 
-    phone_number text,
+    message text, 
+    date text,
+    time text, 
+    destination text, 
+    phoneNumber text,
     ctime timestamptz,
     mtime timestamptz default current_timestamp
     );`

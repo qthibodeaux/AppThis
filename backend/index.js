@@ -34,10 +34,13 @@ app.get("/list", function (req, res){
     })
 })
 
-app.post("/hi", function (req, res){
+app.post("/addEntry", function (req, res){
   const text = req.body.text.text
   const toPerson = '+1'+req.body.to
-  const email = req.body.email
+  const message = req.body.message
+  const date = req.body.date
+  const time = req.body.time
+  const where = req.body.where
 
   client.messages
   .create({
@@ -55,6 +58,22 @@ app.post("/hi", function (req, res){
     "hit": "iono"
     })
   
+})
+
+app.post("/addThis", function(req, res) {
+  //const text = req.body.text.text
+  const toPerson = '+1'+req.body.to
+  const message = req.body.message
+  const date = req.body.date
+  const time = req.body.time
+  const where = req.body.where
+
+  db.addEntry(message, date, time, where, toPerson)
+    .then(() => {
+      console.log("Worked?")
+    }).catch((err) => {
+      console.log(err)
+    })
 })
 
 //#region Kick Off Functions
