@@ -1,13 +1,14 @@
 import React from 'react';
-import { Banner, Main, SubmitButton } from "./components";
+import Grid from '@material-ui/core/Grid';
+import { Banner, Main, SimpleList } from "./components";
 
 function App() {
   return (
-    <div fluid>
-      <Banner className="h-25"/>
-      <Main />
-      <SubmitButton />
-    </div>
+    <Grid container spacing={2}>
+      <Grid item><Banner/></Grid>
+      <Grid item><Main /></Grid>
+      <Grid item><SimpleList /></Grid>
+    </Grid>
   );
 }
 

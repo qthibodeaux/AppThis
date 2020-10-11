@@ -8,8 +8,6 @@ const initialState = {
     whereValue: "Meeting Room #1",
     whereValidation: false,
     numberValue: "",
-    emailValue: "email@mail.com",
-    emailValidation: false,
 }
 
 
@@ -41,9 +39,6 @@ const reducer = (currentState, action) => {
         nextState.whereValidation = action.valid
     } else if (type === 'NUMBERVALUE') {
         nextState.numberValue = action.value
-    } else if (type === 'EMAILVALUE') {
-        nextState.emailValue = action.value
-        nextState.emailValidation = action.valid
     } else if (type === 'DATABASEVALUE') {
         nextState.databaseArray = action.value
     } 

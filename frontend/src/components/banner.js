@@ -15,10 +15,7 @@ function Banner () {
     return (
         <div className={classes.root}>
             <Typography variant="h2" gutterBottom>
-            AppToSMS
-            </Typography>
-            <Typography variant="body2" gutterBottom>
-            A simple application that sends a notification message to friends so that they do not forget your meeting!
+              App To Text
             </Typography>
         </div>
     )

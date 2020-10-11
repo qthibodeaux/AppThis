@@ -5,21 +5,31 @@ import DateAndTime from './dateandtime';
 import Where from './where';
 import Number from './number';
 import Paper from '@material-ui/core/Paper';
+import Submit from './submit';
 
 function Main () {
     return(
-        <Grid container spacing={2}>
+        <Grid 
+            container 
+            spacing={2}
+            direction="column"
+            justify="center"
+            alignItems="center"
+        >
             <Grid item>
-            <Paper elevation={3}><Message /></Paper>
+                <Paper elevation={3}><Message /></Paper>
             </Grid>
             <Grid item>
-            <Paper elevation={3}><DateAndTime /></Paper>
+                <Paper elevation={3}><DateAndTime /></Paper>
             </Grid>
             <Grid item>
-            <Paper elevation={3}><Where /></Paper>
+                <Paper elevation={3}><Where /></Paper>
             </Grid>
             <Grid item>
-            <Paper elevation={3}><Number /></Paper>
+                <Paper elevation={3}><Number /></Paper>
+            </Grid>
+            <Grid>
+                <Paper elevation={3}><Submit /></Paper>
             </Grid>
         </Grid>
     )

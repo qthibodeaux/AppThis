@@ -49,9 +49,17 @@ function SubmitButton(props) {
     })
   }
 
+  function disableThis () {
+    if(props.messageValidation === true && props.whereValidation === true) {
+      setDisable(false)
+    } else {
+      setDisable(true)
+    }
+  }
+
   useEffect(() =>  {
     generateText()
-    console.log(text)
+    disableThis()
   })
 
   return (
@@ -59,33 +67,14 @@ function SubmitButton(props) {
       <Button variant="contained" color="primary" onClick={heyPost} disabled={isDisbled}>
         Primary
       </Button>
-      <div>
-        <p>Total {text}</p>
-        <p>message value: {props.message}</p>
-        <p>message validity: {props.messageValidation.toString()}</p>
-        <p>datevalue: {props.date}</p>
-        <p>timevalue: {props.time}</p>
-        <p>wherevalue: {props.where}</p>
-        <p>wherevalidation {props.whereValidation.toString()}</p>
-        <p>numbervlaue: {props.number}</p>
-        <p>emailvalue {props.email}</p>
-        <p>emailvalidation {props.emailValidation.toString()}</p>
-      </div>
     </div>
   );
 }
 
 function mapStateToProps (currentReduxStoreState, _ownProps) {
   return {
-    message: currentReduxStoreState.messageValue,
     messageValidation: currentReduxStoreState.messageValidation,
-    date: currentReduxStoreState.dateValue,
-    time: currentReduxStoreState.timeValue,
-    where: currentReduxStoreState.whereValue,
     whereValidation: currentReduxStoreState.whereValidation,
-    number: currentReduxStoreState.numberValue,
-    email: currentReduxStoreState.emailValue,
-    emailValidation: currentReduxStoreState.emailValidation,
   }
 }
 

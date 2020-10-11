@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -19,32 +19,9 @@ const useStyles = makeStyles((theme) => ({
 function Number (props){
 
     const classes = useStyles();
-    const [emailError, setEmailError] = useState(false)
-    const [emailHelpText, setEmailHelpText] = useState("")
-    const [emailValidition, setEmailValidation] = useState(false)
 
     const numberSelection = (val) => {  
         props.dispatch({type: 'NUMBERVALUE', value: val})
-    }
-
-    const emailSelection = (val) => {
-        validateEmail(val)
-        props.dispatch({type: 'EMAILVALUE', value: val, valid: emailValidition})
-    }
-
-    function validateEmail (mail) {
-        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail))
-        {
-            setEmailError(false)
-            setEmailHelpText("")
-            setEmailValidation(true)
-        } else {
-            setEmailError(true)
-            setEmailHelpText("Format: name@mail.com")
-            setEmailValidation(false)
-        }
-        
-        
     }
 
     return(
@@ -61,15 +38,6 @@ function Number (props){
                     helperText="Format: +1XXXXXXXXX"
                     onChange={(e) => numberSelection(e.currentTarget.value)}
                 />
-                <TextField
-                    id="filled-search" 
-                    label="Email Address"
-                    type="Email Address"
-                    variant="filled" 
-                    helperText={emailHelpText}
-                    error={emailError}
-                    onChange={(e) => emailSelection(e.currentTarget.value)}
-                />
             </form>
         </div>
     )
@@ -78,7 +46,6 @@ function Number (props){
 function mapStateToProps (currentReduxStoreState, _ownProps) {
     return {
         numberValue: currentReduxStoreState.numberValue,
-        emailValue: currentReduxStoreState.emailValue,
     }
 }
 
