@@ -14,24 +14,12 @@ const useStyles = makeStyles((theme) => ({
 
 function SubmitButton(props) {
   const classes = useStyles();
-  const [nem, setNem] = useState([""])
   const [isDisbled, setDisable] = useState(false)
   const [text, setText] = useState("")
 
   function generateText () {
     const start = "Message: " + props.message + " / Date: " + props.date + " / Time: " + props.time + " / Place: " +  props.where
     setText(start)
-  }
-
-  const getBackend = () => {
-    axios.get("/list").then(response => {
-      setNem(response.data)
-      console.log(nem)
-      props.dispatch({type: 'DATABASEVALUE', value: nem})
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
   }
 
   const heyPost = () => {

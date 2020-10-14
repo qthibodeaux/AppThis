@@ -1,14 +1,14 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import { Banner, Main, SimpleList } from "./components";
+import { Banner, Main, SimpleList, SubmitButton } from "./components";
 
 function App() {
   return (
-    <Grid container spacing={2}>
-      <Grid item><Banner/></Grid>
-      <Grid item><Main /></Grid>
-      <Grid item><SimpleList /></Grid>
-    </Grid>
+    <div>
+      <div><Banner/></div>
+      <div><Main /></div>
+      <div><SubmitButton /></div>
+      <div><SimpleList /></div>
+    </div>
   );
 }
 

@@ -12,24 +12,21 @@ function Main () {
         <Grid 
             container 
             spacing={2}
-            direction="column"
+            direction="row"
             justify="center"
             alignItems="center"
         >
             <Grid item>
-                <Paper elevation={3}><Message /></Paper>
+                <Message />
             </Grid>
             <Grid item>
-                <Paper elevation={3}><DateAndTime /></Paper>
+                <DateAndTime />
             </Grid>
             <Grid item>
-                <Paper elevation={3}><Where /></Paper>
+                <Where />
             </Grid>
             <Grid item>
-                <Paper elevation={3}><Number /></Paper>
-            </Grid>
-            <Grid>
-                <Paper elevation={3}><Submit /></Paper>
+                <Number />
             </Grid>
         </Grid>
     )

@@ -42,6 +42,13 @@ app.post("/addEntry", function (req, res){
   const time = req.body.time
   const where = req.body.where
 
+  db.addEntry(message, date, time, where, toPerson)
+    .then(() => {
+      console.log("Worked?")
+    }).catch((err) => {
+      console.log(err)
+    })
+
   client.messages
   .create({
      body: text,
@@ -55,25 +62,9 @@ app.post("/addEntry", function (req, res){
   })
 
   res.status(200).json({
-    "hit": "iono"
+    all: "good"
     })
   
-})
-
-app.post("/addThis", function(req, res) {
-  //const text = req.body.text.text
-  const toPerson = '+1'+req.body.to
-  const message = req.body.message
-  const date = req.body.date
-  const time = req.body.time
-  const where = req.body.where
-
-  db.addEntry(message, date, time, where, toPerson)
-    .then(() => {
-      console.log("Worked?")
-    }).catch((err) => {
-      console.log(err)
-    })
 })
 
 //#region Kick Off Functions
