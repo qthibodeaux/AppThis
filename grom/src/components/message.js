@@ -17,6 +17,8 @@ function Message (props) {
             </Paragraph>
             <TextArea 
                 placeholder="Message to send"
+                resize={false}
+                plain={true}
                 value={value}
                 onChange={event => newSelection(event.target.value)}
             />
