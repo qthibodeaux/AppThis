@@ -1,43 +1,49 @@
-import React from 'react';
-import { Grommet, Box  } from 'grommet';
+import React, { useContext } from 'react';
+import {
+  Box,
+  Card,
+  Grid,
+  Grommet,
+  ResponsiveContext,
+  Text,
+} from 'grommet';
 import { Banner, Main } from "./components";
-import { deepMerge } from 'grommet/utils';
-import { grommet } from 'grommet/themes';
 
-const customBreakpoints = deepMerge(grommet, {
+const theme = {
   global: {
-    breakpoints: {
-      xsmall: {
-        value: 500,
-      },
-      small: {
-        value: 900,
-      },
-      medium: undefined,
-      middle: {
-        value: 3000,
-      },
-    },
     font: {
       family: 'Roboto',
       size: '18px',
       height: '20px',
     },
   },
-});
+}
+
+const cards = Array(20)
+  .fill()
+  
+  .map((_, i) => <Text key={i}>{`Card ${i}`}</Text>);
 
 function App() {
-
+  const size = useContext(ResponsiveContext);
   return (
-    <Grommet theme={customBreakpoints} themeMode="dark" full>
+    <Grommet theme={theme} themeMode="dark" full>
       <Box>
           <Banner>
             AppToSMS
           </Banner>
           <Main />
+          <Grid columns={size !== 'small' ? 'small' : '100%'} gap="small">
+            {cards.map((card, index) => (
+              <Card pad="large" key={index}>
+                {card}
+              </Card>
+            ))}
+          </Grid>
       </Box>
     </Grommet>
   );
 }
 
 export default App;
+
