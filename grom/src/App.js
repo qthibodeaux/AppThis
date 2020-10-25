@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Banner from './banner';
 import Databank from './databank';
-import TryAgain from './TryAgain'
+import TryAgain from './TryAgain';
 import { Grommet, Box, Grid, FormField, MaskedInput, TextArea, Button, Form,  DateInput, Text } from 'grommet';
 import { connect } from 'react-redux'
 import axios from 'axios';
-import { UserSettings } from 'grommet-icons';
 
 const theme = {
   global: {
@@ -25,13 +24,15 @@ function App(props) {
   const [number, setNumber] = useState("")
   const [time, setTime] = useState("")
   const [where, setWhere] = useState("")
-  const [date, setDate] = useState("")
-  const [splice, setSplice] = useState(2817348561)
+  const [date, setDate] = useState({ value: '' })
+  const [day, setDay] = useState("")
+  const [month, setMonth] = useState("")
+  const [year, setYear] = useState("")
+  const [bigDate, setBigDate] = useState("")
 
   function loadDB () {
     axios.get("/list")
     .then(function (response) {
-      console.log(response.data);
       props.dispatch({type: 'DATAVALUE', value: props.data})
     })
     .catch(function (error) {
@@ -42,27 +43,17 @@ function App(props) {
     }
 
     useEffect(() => {
-      console.log(props.appLoad)
         if(props.appLoad !== true) loadDB()
-
-        if(number.length === 14) {
-          setSplice(number.slice(1,4)+number.slice(6,9)+number.slice(10,14))
-        }
     })
 
   function submit (data) {
     console.log(data)
     if(data.date !== undefined){
-      const day = data.date.slice(7,9)
-      const month = data.date.slice(5,6)
-      const year = data.date.slice(0,4)
-      const newDate = month + "/" + day + "/" + year
-      console.log(newDate)
   
       axios.post("/addEntry", {
         where: data.where,
         message: data.message,
-        number: splice,
+        number: data.number,
         date: data.date,
         time: data.time,
       })
@@ -74,6 +65,11 @@ function App(props) {
       })
     }
   }
+
+  const onChange = nextValue => {
+    console.log('onChange', nextValue);
+    setDate(nextValue);
+  };
 
   return (
     <Grommet theme={theme} themeMode="dark" full>
@@ -184,7 +180,7 @@ function App(props) {
                       name="date" 
                       format="mm/dd/yyyy"
                       value={date}
-                      onChange={event => setDate(event.value)}/>
+                      onChange={onChange}/>
                   </FormField>
               </Box>
 
@@ -214,7 +210,10 @@ function App(props) {
                       ]}
                       name="number"
                       value={number}
-                      onChange={event => setNumber(event.target.value)}
+                      onChange={(event) => {
+                        console.log(event.target.value)
+                        setNumber(event.target.value)
+                      }}
                     />
                 </FormField>
               </Box>
@@ -228,10 +227,10 @@ function App(props) {
             >
               <Button type="submit" primary label="Submit" onClick={submit}/>
               <Button type="reset" label="Reset" />
-                    <Text>{splice}</Text>
+                    <Text>{date}</Text>
             </Box>
           </Form>
-          <TryAgain />
+          <Databank />
       </Box>
     </Grommet>
   );
