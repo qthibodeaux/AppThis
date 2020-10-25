@@ -16,7 +16,6 @@ app.use(bodyParser.json())
 app.use(express.urlencoded({extended: true}))
 
 app.get("/", function (req, res){
-    console.log(process.env.MYNUMBER)
     res.send("Hello world!")
 })
 
@@ -79,6 +78,14 @@ app.delete("/deleteEntry/:id", function (req, res) {
     }).catch((err) =>{
       console.log("Delete Error")
       console.log(err)
+    })
+
+    db.getNotes()
+    .then((list) => {
+      res.send(list.rows)
+    })
+    .catch((err) => {
+      res.status(404).send('Iono fam')
     })
 })
 

@@ -40,12 +40,12 @@ const [data, setData] = useState("");
     })
     }
 
+  function spliceNumber () {
+    setSplice(number.slice(1,4)+number.slice(6,9)+number.slice(10,14))
+  }
+
     useEffect(() => {
         if(isLoaded !== true) loadDB()
-
-        if(number.length === 14) {
-          setSplice(number.slice(1,4)+number.slice(6,9)+number.slice(10,14))
-        }
     })
 
   function submit (data) {
@@ -55,7 +55,8 @@ const [data, setData] = useState("");
       const month = data.date.slice(5,7)
       const year = data.date.slice(0,4)
       const newDate = month + "/" + day + "/" + year
-  
+      spliceNumber()
+
       axios.post("/addEntry", {
         where: data.where,
         message: data.message,
