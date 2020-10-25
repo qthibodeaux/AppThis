@@ -23,10 +23,6 @@ app.get("/", function (req, res){
 app.get("/list", function (req, res){
   db.getNotes()
     .then((list) => {
-      console.log("Success")
-      console.log(list)
-      console.log("````````````````````````````````````````````````````")
-      //res.send({some: 'json'})
       res.send(list.rows)
     })
     .catch((err) => {
@@ -35,13 +31,18 @@ app.get("/list", function (req, res){
 })
 
 app.post("/addEntry", function (req, res){
-  const text = req.body.text.text
-  const toPerson = '+1'+req.body.to
-  const message = req.body.message
-  const date = req.body.date
-  const time = req.body.time
-  const where = req.body.where
+  if (req.body !== undefined && req.body.number.length > 8) {
+    const message = req.body.message
+    const date = req.body.date
+    const time = req.body.time
+    const where = req.body.where
+    const number = req.body.number
+    const text = "Message: " + message + " / Date: " + date + " / Time: " + time + " / Place: " +  where
+  }
 
+  console.log(req.body)
+
+  /*
   db.addEntry(message, date, time, where, toPerson)
     .then(() => {
       console.log("Worked?")
@@ -64,7 +65,7 @@ app.post("/addEntry", function (req, res){
   res.status(200).json({
     all: "good"
     })
-  
+  */
 })
 
 //#region Kick Off Functions

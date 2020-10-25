@@ -1,13 +1,8 @@
 import { createStore } from 'redux';
 
 const initialState = {
-    messageValue: "Message To Send",
-    messageValidation: false,
-    dateValue: "2020-10-24",
-    timeValue: "10:00",
-    whereValue: "Meeting Room #1",
-    whereValidation: false,
-    numberValue: "",
+    appLoad: false,
+    data: {},
 }
 
 
@@ -27,21 +22,11 @@ const reducer = (currentState, action) => {
       console.error('[Developer Error] action.type is not a string:', action)
     }
 
-    if (type === 'MESSAGEVALUE') {
-        nextState.messageValue = action.value
-        nextState.messageValidation = action.valid
-    } else if (type === 'DATEVALUE') {
-        nextState.dateValue = action.value
-    } else if (type === 'TIMEVALUE') {
-        nextState.timeValue = action.value
-    } else if (type === 'WHEREVALUE') {
-        nextState.whereValue = action.value
-        nextState.whereValidation = action.valid
-    } else if (type === 'NUMBERVALUE') {
-        nextState.numberValue = action.value
-    } else if (type === 'DATABASEVALUE') {
-        nextState.databaseArray = action.value
-    } 
+    if (type === 'LOADVALUE') {
+        nextState.appLoad = action.value
+    } else if (type === 'DATAVALUE')  {
+        nextState.data = action.value
+    }
 
     return nextState
 }
