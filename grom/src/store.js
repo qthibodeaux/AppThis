@@ -1,8 +1,7 @@
 import { createStore } from 'redux';
 
 const initialState = {
-    appLoad: false,
-    data: {},
+    storeData: []
 }
 
 
@@ -22,10 +21,8 @@ const reducer = (currentState, action) => {
       console.error('[Developer Error] action.type is not a string:', action)
     }
 
-    if (type === 'LOADVALUE') {
-        nextState.appLoad = action.value
-    } else if (type === 'DATAVALUE')  {
-        nextState.data = action.value
+    if (type === 'STOREVALUE') {
+        nextState.storeData = action.value
     }
 
     return nextState

@@ -1,9 +1,7 @@
-import React, { useState }  from 'react'
+import React from 'react'
 import { Box, List, Text, Button  } from 'grommet';
 import { Trash  } from 'grommet-icons';
 import axios from 'axios';
-
-const [db, setDB ] = useState('')
 
 function ListItem (props) {
     const message = "Message: " + props.datum.message
@@ -12,13 +10,16 @@ function ListItem (props) {
     const date = "What date is themetting: " + props.datum.date
     const number = "What number is the message sent to: " + props.datum.phonenumber
 
+    console.log("List Item props")
     console.log(props)
 
     function deleteItem () {
         const id = props.datum.id
         axios.delete("deleteEntry/"+id)
             .then(function (response) {
+                console.log("delete response")
                 console.log(response)
+                props.dispatch({type: 'STOREVALUE', value: response.data})
             })
             .catch(function (error) {
                console.log(error);
@@ -46,6 +47,10 @@ function ListItem (props) {
 }
 
 function Databank (props) {
+
+    console.log("List props")
+    console.log(props)
+
     return (
         <Box pad="small">
             <Text>Records</Text>
@@ -57,6 +62,5 @@ function Databank (props) {
         </Box>
     )
 }
-
 
 export default Databank

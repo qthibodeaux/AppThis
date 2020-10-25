@@ -22,6 +22,7 @@ app.get("/", function (req, res){
 app.get("/list", function (req, res){
   db.getNotes()
     .then((list) => {
+      console.log(list.rows)
       res.send(list.rows)
     })
     .catch((err) => {
