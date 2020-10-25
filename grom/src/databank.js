@@ -4,6 +4,7 @@ import { FormEdit, Trash  } from 'grommet-icons';
 import axios from 'axios';
 
 function ListItem (props) {
+    console.log(props)
     const message = "Message: " + props.datum.message
     const where = "Where is the meeting: " + props.datum.where
     const time = "What time is the meeting: " + props.datum.time
