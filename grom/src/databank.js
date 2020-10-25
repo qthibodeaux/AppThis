@@ -1,15 +1,14 @@
-import React, { useState, useEffect} from 'react'
+import React  from 'react'
 import { Box, List, Text, Button  } from 'grommet';
 import { FormEdit, Trash  } from 'grommet-icons';
-import axios from 'axios';
 
 function ListItem (props) {
     console.log(props)
     const message = "Message: " + props.datum.message
-    const where = "Where is the meeting: " + props.datum.where
+    const where = "Where is the meeting: " + props.datum.destination
     const time = "What time is the meeting: " + props.datum.time
     const date = "What date is themetting: " + props.datum.date
-    const number = "What number is the message sent to: " + props.datum.number
+    const number = "What number is the message sent to: " + props.datum.phonenumber
 
     return (
         <Box
@@ -32,31 +31,11 @@ function ListItem (props) {
     )
 }
 
-function Databank () {
-    const [list, setList] = useState([""])
-    const [didLoad, setDidLoad] = useState(false)
-
-    function loadDB () {
-        axios.get("/list")
-        .then(function (response) {
-          console.log(response.data);
-          setList(response.data)
-        })
-        .catch(function (error) {
-          console.log(error);
-        })
-
-        setDidLoad(true)
-    }
-
-    useEffect(() => {
-        if(didLoad !== true) loadDB()
-    })
-
+function Databank (props) {
     return (
         <Box pad="small">
             <Text>Records</Text>
-            <List data={list} pad="medium">
+            <List data={props.data} pad="medium">
                 {(datum, index) => (
                     <ListItem index={index} datum={datum} />
                 )}
@@ -64,5 +43,6 @@ function Databank () {
         </Box>
     )
 }
+
 
 export default Databank

@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Banner from './banner';
 import Databank from './databank';
-import TryAgain from './TryAgain'
 import { Grommet, Box, Grid, FormField, MaskedInput, TextArea, Button, Form,  DateInput, Text } from 'grommet';
-import { connect } from 'react-redux'
 import axios from 'axios';
-import { UserSettings } from 'grommet-icons';
 
 const theme = {
   global: {
@@ -19,32 +16,32 @@ const theme = {
 
 
 
-function App(props) {
+function App() {
 
-  const [message, setMessage] = useState("")
-  const [number, setNumber] = useState("")
-  const [time, setTime] = useState("")
-  const [where, setWhere] = useState("")
-  const [date, setDate] = useState("")
-  const [splice, setSplice] = useState(2817348561)
+const [message, setMessage] = useState("")
+const [number, setNumber] = useState("")
+const [time, setTime] = useState("")
+const [where, setWhere] = useState("")
+const [date, setDate] = useState("")
+const [splice, setSplice] = useState(2817348561)
+const [isLoaded, setIsLoaded] = useState(false);
+const [data, setData] = useState("");
+
 
   function loadDB () {
+
     axios.get("/list")
     .then(function (response) {
-      console.log(response.data);
-      props.dispatch({type: 'DATAVALUE', value: props.data})
+      setData(response.data)
+      setIsLoaded(true)
     })
     .catch(function (error) {
       console.log(error);
     })
-
-    props.dispatch({type: 'LOADVALUE', value: true})
     }
 
     useEffect(() => {
-      console.log(props.appLoad)
-        console.log(props.appLoad)
-        if(props.appLoad !== true) loadDB()
+        if(isLoaded !== true) loadDB()
 
         if(number.length === 14) {
           setSplice(number.slice(1,4)+number.slice(6,9)+number.slice(10,14))
@@ -58,7 +55,6 @@ function App(props) {
       const month = data.date.slice(5,7)
       const year = data.date.slice(0,4)
       const newDate = month + "/" + day + "/" + year
-      console.log(newDate)
   
       axios.post("/addEntry", {
         where: data.where,
@@ -74,7 +70,7 @@ function App(props) {
         console.log(error);
       })
 
-      props.dispatch({type: 'LOADVALUE', value: false})
+      loadDB()
     }
   }
 
@@ -88,7 +84,6 @@ function App(props) {
             direction='row'
             align='center'
             justify='center'
-            onChange={value => console.log('change', value)}
             onReset={() => {
               setNumber("")
               setWhere("")
@@ -233,20 +228,10 @@ function App(props) {
               <Button type="reset" label="Reset" />
             </Box>
           </Form>
-          <Databank />
+          {!isLoaded ? <Text>How this work</Text> : <Databank data={data}/>}
       </Box>
     </Grommet>
   );
 }
 
-function mapStateToProps (currentReduxStoreState, _ownProps) {
-  return {
-    appLoad: currentReduxStoreState.appLoad,
-    data: currentReduxStoreState.data,
-  }
-}
-
-const ConnectedApp = connect(mapStateToProps)(App)
-
-export default ConnectedApp;
-
+export default App;

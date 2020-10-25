@@ -53,8 +53,21 @@ function addEntry (addMessage, addDate, addTime, addPlace, addPhone) {
         })
 }
 
+const getDeleteQuery = `delete from notes where id = ?`
+function deleteEntry (id) {
+    return conn.raw(getDeleteQuery, id)
+        .then((result) => {
+            console.log(result.rows)
+            return result.rows
+        }) .catch((err) => {
+            console.log('Delete Error')
+            console.log(err)
+        })
+}
+
 module.exports = {
     connect: connect,
     getNotes: getNotes,
     addEntry: addEntry,
+    deleteEntry: deleteEntry,
 }
