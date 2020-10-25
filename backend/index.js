@@ -19,12 +19,6 @@ app.get("/", function (req, res){
     res.send("Hello world!")
 })
 
-app.get('/:id', function (req, res) {
-  const newId = req.params.id
-  console.log(newId)
-  res.send(newId)
-})
-
 app.get("/list", function (req, res){
   db.getNotes()
     .then((list) => {

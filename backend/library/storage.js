@@ -39,7 +39,7 @@ function getNotes () {
     })
 }
 
-const createNameQuery = `insert into notes (uuid, message, date, time, destination, phoneNumber, ctime, mtime)
+const createNameQuery = `insert into notes (uuid, message, date, time, destination, phonenumber, ctime, mtime)
 values (?, ?, ?, ?, ?, ?, current_timestamp, current_timestamp)`
 
 //addMessage, addDate, addTime, addPlace, addPhone

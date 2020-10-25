@@ -1,14 +1,29 @@
-import React  from 'react'
+import React, { useState }  from 'react'
 import { Box, List, Text, Button  } from 'grommet';
-import { FormEdit, Trash  } from 'grommet-icons';
+import { Trash  } from 'grommet-icons';
+import axios from 'axios';
+
+const [db, setDB ] = useState('')
 
 function ListItem (props) {
-    console.log(props)
     const message = "Message: " + props.datum.message
     const where = "Where is the meeting: " + props.datum.destination
     const time = "What time is the meeting: " + props.datum.time
     const date = "What date is themetting: " + props.datum.date
     const number = "What number is the message sent to: " + props.datum.phonenumber
+
+    console.log(props)
+
+    function deleteItem () {
+        const id = props.datum.id
+        axios.delete("deleteEntry/"+id)
+            .then(function (response) {
+                console.log(response)
+            })
+            .catch(function (error) {
+               console.log(error);
+            })
+    }
 
     return (
         <Box
@@ -18,8 +33,7 @@ function ListItem (props) {
             size="xsmall"
             align="center"
         >
-            <div><Button  label={<FormEdit size="small"/>} /></div>
-            <div><Button  label={<Trash size="small"/>} /></div>
+            <div><Button  label={<Trash size="small"/>}  onClick={deleteItem}/></div>
             <Box direction="column">
                 <Text size="xsmall">{message}</Text>
                 <Text size="xsmall">{where}</Text>

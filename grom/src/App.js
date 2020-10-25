@@ -33,12 +33,13 @@ const [data, setData] = useState("");
     axios.get("/list")
     .then(function (response) {
       setData(response.data)
+      console.log(data)
       setIsLoaded(true)
     })
     .catch(function (error) {
       console.log(error);
     })
-    }
+  }
 
   function spliceNumber () {
     setSplice(number.slice(1,4)+number.slice(6,9)+number.slice(10,14))

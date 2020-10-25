@@ -6,7 +6,7 @@ CREATE TABLE Notes (
     date text,
     time text, 
     destination text, 
-    phoneNumber text,
+    phonenumber text,
     ctime timestamptz,
     mtime timestamptz default current_timestamp
     );`
