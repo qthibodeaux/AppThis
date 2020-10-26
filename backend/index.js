@@ -64,26 +64,6 @@ app.post("/addEntry", function (req, res){
   
 })
 
-app.delete("/deleteEntry/:id", function (req, res) {
-  const newId = req.params.id
-  db.deleteEntry(newId)
-    .then((response) => {
-      console.log("Success")
-      console.log(response)
-    }).catch((err) =>{
-      console.log("Delete Error")
-      console.log(err)
-    })
-
-    db.getNotes()
-    .then((list) => {
-      res.send(list.rows)
-    })
-    .catch((err) => {
-      res.status(404).send('Iono fam')
-    })
-})
-
 //#region Kick Off Functions
 const startExpressApp = () => {
     app.listen(port, () => {

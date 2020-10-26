@@ -14,9 +14,7 @@ const theme = {
   },
 }
 
-
-
-function App() {
+function App(props) {
 
 const [message, setMessage] = useState("")
 const [number, setNumber] = useState("")
@@ -29,11 +27,9 @@ const [data, setData] = useState("");
 
 
   function loadDB () {
-
     axios.get("/list")
     .then(function (response) {
       setData(response.data)
-      console.log(data)
       setIsLoaded(true)
     })
     .catch(function (error) {
@@ -50,7 +46,6 @@ const [data, setData] = useState("");
     })
 
   function submit (data) {
-    console.log(data)
     if(data.date !== undefined){
       const day = data.date.slice(8,10)
       const month = data.date.slice(5,7)
@@ -230,7 +225,7 @@ const [data, setData] = useState("");
               <Button type="reset" label="Reset" />
             </Box>
           </Form>
-          {!isLoaded ? <Text>How this work</Text> : <Databank data={data}/>}
+          {!isLoaded ? <Text>Loading</Text> : <Databank data={data}/>}
       </Box>
     </Grommet>
   );

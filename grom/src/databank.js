@@ -1,7 +1,5 @@
 import React from 'react'
-import { Box, List, Text, Button  } from 'grommet';
-import { Trash  } from 'grommet-icons';
-import axios from 'axios';
+import { Box, List, Text  } from 'grommet';
 
 function ListItem (props) {
     const message = "Message: " + props.datum.message
@@ -9,22 +7,6 @@ function ListItem (props) {
     const time = "What time is the meeting: " + props.datum.time
     const date = "What date is themetting: " + props.datum.date
     const number = "What number is the message sent to: " + props.datum.phonenumber
-
-    console.log("List Item props")
-    console.log(props)
-
-    function deleteItem () {
-        const id = props.datum.id
-        axios.delete("deleteEntry/"+id)
-            .then(function (response) {
-                console.log("delete response")
-                console.log(response)
-                props.dispatch({type: 'STOREVALUE', value: response.data})
-            })
-            .catch(function (error) {
-               console.log(error);
-            })
-    }
 
     return (
         <Box
@@ -34,7 +16,6 @@ function ListItem (props) {
             size="xsmall"
             align="center"
         >
-            <div><Button  label={<Trash size="small"/>}  onClick={deleteItem}/></div>
             <Box direction="column">
                 <Text size="xsmall">{message}</Text>
                 <Text size="xsmall">{where}</Text>
