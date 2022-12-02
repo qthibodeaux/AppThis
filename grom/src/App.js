@@ -42,6 +42,7 @@ const [data, setData] = useState("");
   }
 
     useEffect(() => {
+      console.log("Loaded?")
         if(isLoaded !== true) loadDB()
     })
 
